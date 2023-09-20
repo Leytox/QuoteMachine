@@ -72,3 +72,11 @@ button:hover {
 #creator-link {
   color: black;
 }
+@media (max-width: 768px) {
+  body {
+    height: 90vh;
+  }
+  .container {
+    width: 400px;
+  }
+}
