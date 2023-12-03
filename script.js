@@ -1,29 +1,23 @@
-let quoteText = document.querySelector("#text"),
-  author = document.querySelector("#author"),
-  tweetBtn = document.querySelector("#tweet-quote");
-document.addEventListener("DOMContentLoaded", () => {
+const quoteText = document.querySelector("#text");
+const author = document.querySelector("#author");
+const tweetBtn = document.querySelector("#tweet-quote");
+document.addEventListener("DOMContentLoaded", async () => {
   async function updateQuote() {
-    const response = await fetch("https://api.quotable.io/random"),
-      data = await response.json();
-    if (response.ok) {
-      let color = `rgb(${Math.floor(Math.random() * 255)},${Math.floor(
-        Math.random() * 255
-      )},${Math.floor(Math.random() * 255)}`;
+    try {
+      const response = await fetch("https://api.quotable.io/random");
+      if (!response.ok) throw new Error("Failed to fetch quote");
+      const data = await response.json();
+      const color = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
       quoteText.textContent = data.content;
       author.textContent = data.author;
-      author.style.color = color;
-      quoteText.style.color = color;
-      document.querySelector(".fa-solid").style.color = color;
-      document.body.style.backgroundColor = color;
-      document.querySelector("button").style.backgroundColor = color;
-      tweetBtn.style.backgroundColor = color;
-      let tweetUrl = `https://twitter.com/intent/tweet?text=${quoteText.innerText} - ${author.innerText}`;
-      tweetBtn.href = tweetUrl;
-    } else {
-      quote.textContent = "An error occured";
-      console.log(data);
+      author.style.color = quoteText.style.color = document.querySelector(".fa-solid").style.color = document.body.style.backgroundColor = document.querySelector("button").style.backgroundColor = tweetBtn.style.backgroundColor = color;
+      tweetBtn.href = `https://twitter.com/intent/tweet?text=${quoteText.innerText} - ${author.innerText}`;
+    } catch (error) {
+      console.error("An error occurred:", error.message);
+      quoteText.textContent = "An error occurred";
+      author.textContent = "";
     }
   }
   document.querySelector("#new-quote").addEventListener("click", updateQuote);
-  updateQuote();
+  await updateQuote();
 });

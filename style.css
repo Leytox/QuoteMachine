@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
-  transition: 1s ease;
+  transition: .5s ease;
 }
 body {
   font-size: 1.5rem;
@@ -12,10 +12,8 @@ body {
   justify-content: center;
   height: 100vh;
   text-align: center;
-  transition: 0.5s ease;
 }
 .container {
-  transition: 0.5s ease;
   padding: 1.5rem;
   background-color: white;
   width: 500px;
@@ -29,23 +27,16 @@ body {
   content: "- ";
 }
 button {
-  /* ... other styles ... */
   font-size: 1.2rem;
   width: 125px;
   height: 50px;
   border-radius: 5px;
   border: none;
   color: white;
-  transition: 0.5s ease;
 }
 
 button:hover {
   cursor: pointer;
-}
-#text,
-#author,
-.fa-solid {
-  transition: color 0.5s ease;
 }
 .creator {
   color: black;
